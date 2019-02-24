@@ -6,6 +6,7 @@ export default class ItemList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            keyword: "",
             itemData: [{
                 name: 'toothpaste',
                 quantity: '1'
@@ -21,6 +22,14 @@ export default class ItemList extends React.Component {
             }]
         };
 
+        this.handleChange = this.handleChange.bind(this);
+
+    }
+
+    handleChange(e) {
+        this.setState({
+            keyword: e.target.value
+        })
     }
 
     render() {
@@ -32,6 +41,10 @@ export default class ItemList extends React.Component {
         return (
             <div>
                 <h1>Shopping List</h1>
+                <input name="keyword"
+                       placeholder="Search"
+                       value={this.state.keyword}
+                       onChange={this.handleChange}/>
                 <div>{item_list}</div>
             </div>
         );
