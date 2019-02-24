@@ -1,6 +1,7 @@
 import React from 'react';
 import Item from './Item';
 import ItemDetails from './ItemDetails';
+import ItemCreate from './ItemCreate';
 import update from 'react-addons-update';
 
 export default class ItemList extends React.Component {
@@ -108,6 +109,7 @@ export default class ItemList extends React.Component {
                 <ItemDetails
                     item={this.state.itemData[this.state.selectedIndex]}
                     isSelected={this.state.selectedIndex!=-1}/>
+                <ItemCreate onCreate={this.handleCreate}/>
             </div>
         );
     }
