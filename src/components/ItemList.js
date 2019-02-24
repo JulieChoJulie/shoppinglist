@@ -61,7 +61,8 @@ export default class ItemList extends React.Component {
             itemData: update(
                 this.state.itemData,
                 {$splice: [[this.state.selectedIndex, 1]]}
-            )
+            ),
+            selectedIndex: -1
         });
     }
 
