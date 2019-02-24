@@ -58,6 +58,9 @@ export default class ItemList extends React.Component {
     }
 
     handleRemove() {
+        if (this.state.selectedIndex < 0 ) {
+            return;
+        }
         this.setState({
             itemData: update(
                 this.state.itemData,
@@ -108,7 +111,8 @@ export default class ItemList extends React.Component {
 
                 <ItemDetails
                     item={this.state.itemData[this.state.selectedIndex]}
-                    isSelected={this.state.selectedIndex!=-1}/>
+                    isSelected={this.state.selectedIndex!=-1}
+                    onRemove={this.handleRemove}/>
                 <ItemCreate onCreate={this.handleCreate}/>
             </div>
         );

@@ -12,13 +12,14 @@ export default class ItemDetails extends React.Component {
 
         // When none is clicked
         const blank = (
-            <div> Nothing is Selected </div>
+            <div> Not Selected </div>
         );
 
         return (
             <div>
                 <h2>Details</h2>
                 {this.props.isSelected ? details : blank}
+                <button onClick={this.props.onRemove}>Remove</button>
             </div>
         )
     }
@@ -28,5 +29,6 @@ ItemDetails.defaultProps = {
     item: {
         name: "",
         quantity: "",
-    }
+    },
+    onRemove: () => {console.error('onRemove is missing');}
 }
