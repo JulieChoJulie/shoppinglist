@@ -37,16 +37,16 @@ export default class ItemCreate extends React.Component {
                 <h2>Create Item</h2>
                 <p>
                     <input
+                    type="text"
+                    name="quantity"
+                    placeholder="quantity"
+                    value={this.state.quantity}
+                    onChange={this.handleChange}/>
+                    <input
                         type="text"
                         name="name"
                         placeholder="name"
                         value={this.state.name}
-                        onChange={this.handleChange}/>
-                    <input
-                        type="text"
-                        name="quantity"
-                        placeholder="quantity"
-                        value={this.state.quantity}
                         onChange={this.handleChange}/>
                 </p>
                 <button onClick={this.handleClick}>Create</button>

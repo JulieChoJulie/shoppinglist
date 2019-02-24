@@ -112,7 +112,8 @@ export default class ItemList extends React.Component {
                 <ItemDetails
                     item={this.state.itemData[this.state.selectedIndex]}
                     isSelected={this.state.selectedIndex!=-1}
-                    onRemove={this.handleRemove}/>
+                    onRemove={this.handleRemove}
+                    onEdit={this.handleEdit}/>
                 <ItemCreate onCreate={this.handleCreate}/>
             </div>
         );

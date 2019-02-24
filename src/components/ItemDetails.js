@@ -1,14 +1,73 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 
 export default class ItemDetails extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isEdit: false,
+            name:'',
+            quantity: ''
+        };
+        this.handleToggle = this.handleToggle.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleEdit = this.handleEdit.bind(this);
+    }
+
+    handleToggle() {
+        if(!this.state.isEdit){
+            this.setState({
+                name: this.props.item.name,
+                quantity: this.props.item.quantity
+            })
+        } else {
+            this.handleEdit();
+        }
+        this.setState({
+            isEdit: !this.state.isEdit
+        })
+    }
+
+    // Handle various inputs
+    handleChange(e) {
+        let newState = {};
+        newState[e.target.name] = e.target.value;
+        this.setState(newState);
+    }
+
+    handleEdit() {
+        this.props.onEdit(this.state.name, this.state.phone);
+    }
+
     render() {
         // Details shown when the item is clicked
         const details = (
             <div>
-                <p>{ this.props.item.name }</p>
                 <p>{ this.props.item.quantity }</p>
+                <p>{ this.props.item.name }</p>
             </div>
         );
+
+        const input_edit = (
+            <div>
+                <p><input
+                    type="text"
+                    name="quantity"
+                    placeholder="quantity"
+                    value={this.state.quantity}
+                    onChange={this.handleChange}/></p>
+                <p><input
+                    type="text"
+                    name="name"
+                    placeholder="name"
+                    value={this.state.name}
+                    onChange={this.handleChange}/></p>
+            </div>
+        )
+
+        const edit = this.state.isEdit ? (input_edit) : details;
+
 
         // When none is clicked
         const blank = (
@@ -18,17 +77,29 @@ export default class ItemDetails extends React.Component {
         return (
             <div>
                 <h2>Details</h2>
-                {this.props.isSelected ? details : blank}
-                <button onClick={this.props.onRemove}>Remove</button>
+                {this.props.isSelected ? edit : blank}
+                <p>
+                    <button onClick={this.props.onRemove}>Remove</button>
+                    <button onClick={this.handleToggle}>
+                        {this.state.isEdit ? 'Okay' : 'Edit'}
+                    </button>
+                </p>
             </div>
         )
     }
 }
+
+ItemDetails.propTypes = {
+    item: PropTypes.object,
+    onRemove: PropTypes.func,
+    onEdit : PropTypes.func,
+};
 
 ItemDetails.defaultProps = {
     item: {
         name: "",
         quantity: "",
     },
-    onRemove: () => {console.error('onRemove is missing');}
-}
+    onRemove: () => {console.error('onRemove is missing');},
+    onEdit: () => {console.error('onEdit is missing');},
+};
