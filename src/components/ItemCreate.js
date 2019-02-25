@@ -10,6 +10,7 @@ export default class ItemCreate extends React.Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.handleKeyPress = this.handleKeyPress.bind(this);
     }
 
     // Handle various inputs
@@ -29,6 +30,13 @@ export default class ItemCreate extends React.Component {
             name: '',
             quantity: '',
         })
+        this.nameInput.focus();
+    }
+
+    handleKeyPress(e) {
+        if(e.charCode === 13) {
+            this.handleClick();
+        }
     }
 
     render() {
@@ -41,13 +49,15 @@ export default class ItemCreate extends React.Component {
                     name="quantity"
                     placeholder="quantity"
                     value={this.state.quantity}
-                    onChange={this.handleChange}/>
+                    onChange={this.handleChange}
+                    ref={(ref)=>{this.nameInput = ref}}/>
                     <input
                         type="text"
                         name="name"
                         placeholder="name"
                         value={this.state.name}
-                        onChange={this.handleChange}/>
+                        onChange={this.handleChange}
+                        onKeyPress={this.handleKeyPress}/>
                 </p>
                 <button onClick={this.handleClick}>Create</button>
             </div>
