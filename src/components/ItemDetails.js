@@ -38,7 +38,7 @@ export default class ItemDetails extends React.Component {
     }
 
     handleEdit() {
-        this.props.onEdit(this.state.name, this.state.phone);
+        this.props.onEdit(this.state.name, this.state.quantity);
     }
 
     handleKeyPress(e) {
