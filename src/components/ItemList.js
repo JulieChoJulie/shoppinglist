@@ -35,6 +35,22 @@ export default class ItemList extends React.Component {
 
     }
 
+    componentWillMount() {
+        const itemData = localStorage.itemData;
+
+        if(itemData) {
+            this.setState({
+                itemData: JSON.parse(itemData)
+            })
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if(JSON.stringify(prevState.itemData) != JSON.stringify(this.state.itemData)) {
+            localStorage.itemData = JSON.stringify(this.state.itemData);
+        }
+    }
+
     handleChange(e) {
         this.setState({
             keyword: e.target.value
